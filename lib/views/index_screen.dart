@@ -97,7 +97,7 @@ class _IndexScreenState extends State<IndexScreen> {
                 child: Stack(children: [
                   const Plate(),
                   buildDices(),
-                  if (!mode && isHide) Bowl(),
+                  if (!mode && isHide) const Bowl(),
                 ]),
               ),
             ),
