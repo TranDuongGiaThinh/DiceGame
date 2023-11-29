@@ -88,13 +88,13 @@ class _BuildSettingBoxState extends State<BuildSettingBox> {
           value: checked,
           onChanged: (value) {
             setState(() {
-              mode = checked;
+              mode = !checked;
             });
           }),
       GestureDetector(
           onTap: () {
             setState(() {
-              mode = checked;
+              mode = !checked;
             });
           },
           child: Text(lable)),

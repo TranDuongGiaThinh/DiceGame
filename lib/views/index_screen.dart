@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:app/views/bowl.dart';
 import 'package:app/views/build_setting_box.dart';
 import 'package:app/views/build_one_dice.dart';
 import 'package:app/views/build_three_dice.dart';
@@ -15,12 +16,13 @@ class IndexScreen extends StatefulWidget {
 }
 
 class _IndexScreenState extends State<IndexScreen> {
-  bool mode = true;
+  bool mode = false;
   int count = 3;
-  List<int> values = [5, 1, 1];
+  List<int> values = [1, 1, 1];
   int score = 0;
 
   bool isSetting = false;
+  bool isHide = true;
 
   rollDices() {
     score = 0;
@@ -29,6 +31,12 @@ class _IndexScreenState extends State<IndexScreen> {
       score += values[i];
     }
     setState(() {});
+  }
+
+  @override
+  initState() {
+    super.initState();
+    rollDices();
   }
 
   updateMode(int newCount, bool newMode) {
@@ -46,9 +54,11 @@ class _IndexScreenState extends State<IndexScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  setState(() {
-                    isSetting = true;
-                  });
+                  if (!isSetting) {
+                    setState(() {
+                      isSetting = true;
+                    });
+                  }
                 },
                 icon: const Icon(Icons.settings))
           ],
@@ -57,48 +67,58 @@ class _IndexScreenState extends State<IndexScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
-              mainAxisAlignment: isSetting? MainAxisAlignment.spaceBetween:MainAxisAlignment.center,
+              mainAxisAlignment: isSetting
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
               children: [
-                if (isSetting)
-                  const SizedBox(),
+                if (isSetting) const SizedBox(),
                 Text(
-                  "Điểm: $score",
+                  (!mode && isHide) ? "Điểm: ?" : "Điểm: $score",
                   style: const TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
                 ),
                 if (isSetting)
-                   Container(
-                      color: Colors.amberAccent,
-                      child: BuildSettingBox(
-                        mode: mode,
-                        count: count,
-                        update: updateMode,
-                      ),
+                  Container(
+                    color: Colors.amberAccent,
+                    child: BuildSettingBox(
+                      mode: mode,
+                      count: count,
+                      update: updateMode,
                     ),
+                  ),
               ],
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 width: 200,
                 height: 300,
                 child: Stack(children: [
-                  Plate(),
-                  buildListItem(),
+                  const Plate(),
+                  buildDices(),
+                  if (!mode && isHide) Bowl(),
                 ]),
               ),
             ),
             ElevatedButton(
                 onPressed: () {
-                  rollDices();
+                  if (!mode && isHide) {
+                    isHide = false;
+                    setState(() {});
+                  } else {
+                    if (!mode) {
+                      isHide = true;
+                    }
+                    rollDices();
+                  }
                 },
-                child: const Text("Lắc"))
+                child: Text((!mode && isHide) ? "Mở" : "Lắc"))
           ],
         ));
   }
 
-  Widget buildListItem() {
+  Widget buildDices() {
     if (count == 1) {
       return BuildOneDice(
         value: values[0],
