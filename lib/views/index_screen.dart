@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:app/views/build_setting_box.dart';
 import 'package:app/views/build_one_dice.dart';
 import 'package:app/views/build_three_dice.dart';
 import 'package:app/views/build_two_dice.dart';
@@ -14,9 +15,12 @@ class IndexScreen extends StatefulWidget {
 }
 
 class _IndexScreenState extends State<IndexScreen> {
+  bool mode = true;
   int count = 3;
   List<int> values = [5, 1, 1];
   int score = 0;
+
+  bool isSetting = false;
 
   rollDices() {
     score = 0;
@@ -27,26 +31,62 @@ class _IndexScreenState extends State<IndexScreen> {
     setState(() {});
   }
 
+  updateMode(int newCount, bool newMode) {
+    count = newCount;
+    mode = newMode;
+    isSetting = false;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Dice Game"),
-          actions: const [Icon(Icons.settings)],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    isSetting = true;
+                  });
+                },
+                icon: const Icon(Icons.settings))
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Điểm: $score",
-              style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20),
+            Row(
+              mainAxisAlignment: isSetting? MainAxisAlignment.spaceBetween:MainAxisAlignment.center,
+              children: [
+                if (isSetting)
+                  const SizedBox(),
+                Text(
+                  "Điểm: $score",
+                  style: const TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                if (isSetting)
+                   Container(
+                      color: Colors.amberAccent,
+                      child: BuildSettingBox(
+                        mode: mode,
+                        count: count,
+                        update: updateMode,
+                      ),
+                    ),
+              ],
             ),
             Center(
               child: Container(
                 width: 200,
                 height: 300,
-                child: Stack(children: [Plate(), buildListItem()]),
+                child: Stack(children: [
+                  Plate(),
+                  buildListItem(),
+                ]),
               ),
             ),
             ElevatedButton(
