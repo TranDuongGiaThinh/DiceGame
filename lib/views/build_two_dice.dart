@@ -10,13 +10,13 @@ class BuilTwoDice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double x = 105;
+    double x = 100;
     double y = 165;
     DiceMode leftDice =
         DiceMode(value: valueLeftDice, point: Offset(x - 55, y));
     DiceMode rightDice =
         DiceMode(value: valueRightDice, point: Offset(x + 55, y));
     return Row(
-        children: [buildDice(dice: leftDice), buildDice(dice: rightDice)]);
+        children: [BuildDice(dice: leftDice), BuildDice(dice: rightDice)]);
   }
 }

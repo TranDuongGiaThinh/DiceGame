@@ -2,8 +2,8 @@ import 'package:app/models/dice_mode.dart';
 import 'package:app/views/quadrilateral.dart';
 import 'package:flutter/material.dart';
 
-class buildDice extends StatelessWidget {
-  const buildDice({super.key, required this.dice});
+class BuildDice extends StatelessWidget {
+  const BuildDice({super.key, required this.dice});
   final DiceMode dice;
 
   @override

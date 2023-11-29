@@ -14,8 +14,8 @@ class BuildThreeDice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double x = 105;
-    double y = 185;
+    double x = 100;
+    double y = 195;
     DiceMode leftDice =
         DiceMode(value: valueLeftDice, point: Offset(x - 55, y - 55));
     DiceMode rightDice =
@@ -23,6 +23,6 @@ class BuildThreeDice extends StatelessWidget {
     DiceMode bottomDice =
         DiceMode(value: valueBottomtDice, point: Offset(x, y + 30));
     return Stack(
-        children: [buildDice(dice: leftDice), buildDice(dice: rightDice), buildDice(dice: bottomDice)]);
+        children: [BuildDice(dice: leftDice), BuildDice(dice: rightDice), BuildDice(dice: bottomDice)]);
   }
 }

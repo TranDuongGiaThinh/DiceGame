@@ -10,10 +10,8 @@ class Quadrilateral extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: CustomPaint(
-        painter: QuadrilateralPainter(quadrilateral, isLeft),
-      ),
+    return CustomPaint(
+      painter: QuadrilateralPainter(quadrilateral, isLeft),
     );
   }
 }

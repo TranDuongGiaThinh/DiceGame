@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Plate extends StatelessWidget {
+  const Plate({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 20,
       height: MediaQuery.of(context).size.width - 100,
       child: CustomPaint(
@@ -18,7 +20,8 @@ class PlatePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = Colors.blue
-      ..style = PaintingStyle.fill;
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
 
     final center = Offset(size.width / 2, size.height / 2);
     final horizontalRadius = size.width ;
