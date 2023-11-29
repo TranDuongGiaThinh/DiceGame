@@ -1,4 +1,4 @@
-import 'package:app/views/index.dart';
+import 'package:app/views/index_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
