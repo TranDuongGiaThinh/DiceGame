@@ -1,3 +1,4 @@
+import 'package:app/models/manage_state.dart';
 import 'package:app/views/index_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => BowlState(),
+      create: (context) => ManageState(),
       child: const MyApp(),
     ),
   );
