@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:app/models/dice_mode.dart';
 import 'package:flutter/material.dart';
 
-class ManageState with ChangeNotifier {
+class StateIndex with ChangeNotifier {
   bool isHide = true;
   bool isSetting = false;
   bool mode = false;
