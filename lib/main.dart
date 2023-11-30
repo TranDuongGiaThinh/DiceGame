@@ -1,4 +1,4 @@
-import 'package:app/models/manage_state.dart';
+import 'package:app/models/state_index.dart';
 import 'package:app/views/index_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => ManageState(),
+      create: (context) => StateIndex(),
       child: const MyApp(),
     ),
   );

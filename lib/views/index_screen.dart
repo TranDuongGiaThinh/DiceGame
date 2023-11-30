@@ -1,3 +1,4 @@
+import 'package:app/models/state_index.dart';
 import 'package:app/views/bowl.dart';
 import 'package:app/views/build_setting_box.dart';
 import 'package:app/views/build_one_dice.dart';
@@ -6,14 +7,13 @@ import 'package:app/views/build_two_dice.dart';
 import 'package:app/views/plate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/manage_state.dart';
 
 class IndexScreen extends StatelessWidget {
   const IndexScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<ManageState>(context);
+    final state = Provider.of<StateIndex>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -98,7 +98,7 @@ class IndexScreen extends StatelessWidget {
     );
   }
 
-  Widget buildDices(ManageState state) {
+  Widget buildDices(StateIndex state) {
     if (state.count == 1) {
       return BuildOneDice(dices: state.dices, shouldReloadDice: state.shouldReload,);
     } else if (state.count == 2) {
