@@ -3,19 +3,19 @@ import 'dart:math';
 import 'package:app/models/dice_mode.dart';
 import 'package:flutter/material.dart';
 
-class StateIndex with ChangeNotifier {
-  bool isHide = true;
+class StateIndexScreen with ChangeNotifier {
+  bool modeHise = true;
+  bool isHide = false;
   bool isSetting = false;
-  bool mode = false;
   bool shouldReload = false;
   int count = 3;
   
   final List<DiceMode> dices = [
-    DiceMode(value: Random().nextInt(6) + 1, point: const Offset(100 - 55, 195 - 55)),
-    DiceMode(value: Random().nextInt(6) + 1, point: const Offset(100 + 55, 195 - 55)),
-    DiceMode(value: Random().nextInt(6) + 1, point: const Offset(100, 195 + 30))
+    DiceMode(value: 1, point: const Offset(100 - 55, 195 - 55)),
+    DiceMode(value: 1, point: const Offset(100 + 55, 195 - 55)),
+    DiceMode(value: 1, point: const Offset(100, 195 + 30))
   ];
-  int score = 0;
+  int score = 3;
 
   void updateHideStatus(bool newValue) {
     if(!newValue){
@@ -30,10 +30,10 @@ class StateIndex with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateMode(int newCount, bool newMode) {
+  void updateMode(int newCount, bool newMode, bool newIsSetting) {
     count = newCount;
-    mode = newMode;
-    isSetting = false;
+    modeHise = newMode;
+    isSetting = newIsSetting;
     shouldReload = true;
     notifyListeners();
   }

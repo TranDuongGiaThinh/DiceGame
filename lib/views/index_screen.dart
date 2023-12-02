@@ -13,7 +13,7 @@ class IndexScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<StateIndex>(context);
+    final state = Provider.of<StateIndexScreen>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -21,9 +21,7 @@ class IndexScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              if (!state.isSetting) {
-                state.setSetting(true);
-              }
+              state.setSetting(!state.isSetting);
             },
             icon: const Icon(Icons.settings),
           ),
@@ -39,7 +37,7 @@ class IndexScreen extends StatelessWidget {
             children: [
               if (state.isSetting) const SizedBox(),
               Text(
-                (!state.mode && state.isHide)
+                (state.modeHise && state.isHide)
                     ? "Điểm: ?"
                     : "Điểm: ${state.score}",
                 style: const TextStyle(
@@ -52,7 +50,7 @@ class IndexScreen extends StatelessWidget {
                 Container(
                   color: Colors.amberAccent,
                   child: BuildSettingBox(
-                    mode: state.mode,
+                    mode: state.modeHise,
                     count: state.count,
                     update: state.updateMode,
                   ),
@@ -67,44 +65,62 @@ class IndexScreen extends StatelessWidget {
                 children: [
                   const Plate(),
                   buildDices(state),
-                  if (state.isHide && !state.mode)
-                    Draggable(
-                      feedback: const Bowl(),
-                      childWhenDragging: Container(),
-                      onDraggableCanceled: (velocity, offset) {
-                        state.updateHideStatus(false);
-                      },
-                      child: const Bowl(),
-                    ),
+                  if (state.isHide && state.modeHise)
+                    if (state.isHide && state.modeHise)
+                      Draggable(
+                        feedback: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.06,
+                            height: MediaQuery.of(context).size.height / 2.28,
+                            color: Colors.transparent,
+                            child: const Bowl(),
+                          ),
+                        ),
+                        childWhenDragging: Container(),
+                        onDraggableCanceled: (velocity, offset) {
+                          state.updateHideStatus(false);
+                        },
+                        child: const Bowl(),
+                      ),
                 ],
               ),
             ),
           ),
           ElevatedButton(
             onPressed: () {
-              if (!state.mode && state.isHide) {
+              if (state.modeHise && state.isHide) {
                 state.updateHideStatus(false);
               } else {
-                if (!state.mode) {
+                if (state.modeHise) {
                   state.updateHideStatus(true);
                 }
                 state.rollDices();
               }
             },
-            child: Text((!state.mode && state.isHide) ? "Mở" : "Lắc"),
+            child: Text((state.modeHise && state.isHide) ? "Mở" : "Lắc"),
           ),
         ],
       ),
     );
   }
 
-  Widget buildDices(StateIndex state) {
+  Widget buildDices(StateIndexScreen state) {
     if (state.count == 1) {
-      return BuildOneDice(dices: state.dices, shouldReloadDice: state.shouldReload,);
+      return BuildOneDice(
+        dices: state.dices,
+        shouldReloadDice: state.shouldReload,
+      );
     } else if (state.count == 2) {
-      return BuilTwoDice(dices: state.dices, shouldReloadDice: state.shouldReload,);
+      return BuilTwoDice(
+        dices: state.dices,
+        shouldReloadDice: state.shouldReload,
+      );
     } else {
-      return BuildThreeDice(dices: state.dices, shouldReloadDice: state.shouldReload,);
+      return BuildThreeDice(
+        dices: state.dices,
+        shouldReloadDice: state.shouldReload,
+      );
     }
   }
 }
