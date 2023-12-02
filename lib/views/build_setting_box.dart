@@ -8,7 +8,7 @@ class BuildSettingBox extends StatefulWidget {
       required this.update});
   final bool mode;
   final int count;
-  final Function(int, bool) update;
+  final Function(int, bool, bool) update;
 
   @override
   State<BuildSettingBox> createState() => _BuildSettingBoxState();
@@ -32,17 +32,17 @@ class _BuildSettingBoxState extends State<BuildSettingBox> {
 
   void increment() {
     if (count < 3) {
-      setState(() {
-        count++;
-      });
+      count++;
+      widget.update(count, mode, true);
+      setState(() {});
     }
   }
 
   void decrement() {
     if (count > 1) {
-      setState(() {
-        count--;
-      });
+      count--;
+      widget.update(count, mode, true);
+      setState(() {});
     }
   }
 
@@ -51,12 +51,12 @@ class _BuildSettingBoxState extends State<BuildSettingBox> {
     return Column(
       children: [
         buildChangeCounter(),
-        buildItemCheckBox(mode, "Hiện ngay kết quả."),
+        buildItemCheckBox(mode, "Ẩn kết quả."),
         ElevatedButton(
             onPressed: () {
-              widget.update(count, mode);
+              widget.update(count, mode, false);
             },
-            child: const Text("Lưu"))
+            child: const Text("Thoát"))
       ],
     );
   }
@@ -87,15 +87,15 @@ class _BuildSettingBoxState extends State<BuildSettingBox> {
       Checkbox(
           value: checked,
           onChanged: (value) {
-            setState(() {
-              mode = !checked;
-            });
+            mode = !checked;
+            widget.update(count, mode, true);
+            setState(() {});
           }),
       GestureDetector(
           onTap: () {
-            setState(() {
-              mode = !checked;
-            });
+            mode = !checked;
+            widget.update(count, mode, true);
+            setState(() {});
           },
           child: Text(lable)),
     ]);
