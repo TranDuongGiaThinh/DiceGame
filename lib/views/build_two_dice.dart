@@ -11,7 +11,7 @@ class BuilTwoDice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double x = 100;
-    double y = 165;
+    double y = 155;
 
     if (shouldReloadDice) {
       dices[0] = DiceMode(value: dices[0].value, point: Offset(x - 55, y));
