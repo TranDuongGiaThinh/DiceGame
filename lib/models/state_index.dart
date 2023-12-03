@@ -30,11 +30,11 @@ class StateIndexScreen with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateMode(int newCount, bool newMode, bool newIsSetting) {
+  void updateMode(int newCount, bool newMode, bool newIsSetting, bool reload) {
     count = newCount;
     modeHise = newMode;
     isSetting = newIsSetting;
-    shouldReload = true;
+    shouldReload = reload;
     notifyListeners();
   }
 
