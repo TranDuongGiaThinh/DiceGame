@@ -66,7 +66,6 @@ class IndexScreen extends StatelessWidget {
                   const Plate(),
                   buildDices(state),
                   if (state.isHide && state.modeHise)
-                    if (state.isHide && state.modeHise)
                       Draggable(
                         feedback: Material(
                           color: Colors.transparent,
@@ -100,6 +99,7 @@ class IndexScreen extends StatelessWidget {
             },
             child: Text((state.modeHise && state.isHide) ? "Mở" : "Lắc"),
           ),
+          Container()
         ],
       ),
     );

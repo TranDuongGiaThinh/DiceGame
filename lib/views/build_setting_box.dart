@@ -56,7 +56,7 @@ class _BuildSettingBoxState extends State<BuildSettingBox> {
             onPressed: () {
               widget.update(count, mode, false, true);
             },
-            child: const Text("Thoát"))
+            child: const Text("Đóng"))
       ],
     );
   }
