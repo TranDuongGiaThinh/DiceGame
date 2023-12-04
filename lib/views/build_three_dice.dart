@@ -10,12 +10,12 @@ class BuildThreeDice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double x = 100;
-    double y = 185;
+    double y = 180;
     
     if (shouldReloadDice) {
-      dices[0] = DiceMode(value: dices[0].value, point: Offset(x - 55, y - 55));
-      dices[1] = DiceMode(value: dices[1].value, point: Offset(x + 55, y - 55));
-      dices[2] = DiceMode(value: dices[2].value, point: Offset(x, y + 30));
+      dices[0] = DiceMode(value: dices[0].value, point: Offset(x - 55, y - 50));
+      dices[1] = DiceMode(value: dices[1].value, point: Offset(x + 55, y - 50));
+      dices[2] = DiceMode(value: dices[2].value, point: Offset(x, y + 25));
     }
     else{
       dices[0].point = Offset(x - 55, y - 55);
