@@ -9,7 +9,10 @@ class StateIndexScreen with ChangeNotifier {
   bool isSetting = false;
   bool shouldReload = false;
   int count = 3;
-  
+
+  double? widthBowl;
+  double? heightBowl;
+
   final List<DiceMode> dices = [
     DiceMode(value: 1, point: const Offset(100 - 55, 180 - 50)),
     DiceMode(value: 1, point: const Offset(100 + 55, 180 - 50)),
@@ -17,12 +20,21 @@ class StateIndexScreen with ChangeNotifier {
   ];
   int score = 3;
 
+  void reload(){
+    notifyListeners();
+  }
+
   void updateHideStatus(bool newValue) {
-    if(!newValue){
+    if (!newValue) {
       shouldReload = false;
     }
     isHide = newValue;
     notifyListeners();
+  }
+
+  void setSizeBowl(double w, double h) {
+    widthBowl = w;
+    heightBowl = h;
   }
 
   void setSetting(bool newValue) {

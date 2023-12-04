@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Bowl extends StatelessWidget {
-  const Bowl({super.key});
+  const Bowl({super.key, required this.state});
+  final state;
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +10,7 @@ class Bowl extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width,
       child: CustomPaint(
-        painter: BowlPainter(),
+        painter: BowlPainter(state),
         foregroundPainter: BottomBowl(),
       ),
     );
@@ -17,6 +18,9 @@ class Bowl extends StatelessWidget {
 }
 
 class BowlPainter extends CustomPainter {
+  BowlPainter(this.state);
+  final state;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -24,10 +28,18 @@ class BowlPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final center = Offset(size.width / 2, size.height / 2);
-    final horizontalRadius = size.width /1.4;
+    final horizontalRadius = size.width / 1.4;
     final verticalRadius = size.height / 2.2;
+    if (state.widthBowl == null) {
+      state.setSizeBowl(size.width, size.height);
+    }
 
-    canvas.drawOval(Rect.fromCenter(center: center, width: horizontalRadius * 2, height: verticalRadius * 2), paint);
+    canvas.drawOval(
+        Rect.fromCenter(
+            center: center,
+            width: horizontalRadius * 2,
+            height: verticalRadius * 2),
+        paint);
   }
 
   @override
@@ -49,7 +61,10 @@ class BottomBowl extends CustomPainter {
     final verticalRadius = size.height / 5.5;
 
     canvas.drawOval(
-      Rect.fromCenter(center: center, width: horizontalRadius * 2, height: verticalRadius * 2),
+      Rect.fromCenter(
+          center: center,
+          width: horizontalRadius * 2,
+          height: verticalRadius * 2),
       paint,
     );
   }

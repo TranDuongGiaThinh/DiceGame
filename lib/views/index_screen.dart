@@ -14,7 +14,9 @@ class IndexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<StateIndexScreen>(context);
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      state.reload();
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dice Game"),
@@ -66,22 +68,22 @@ class IndexScreen extends StatelessWidget {
                   const Plate(),
                   buildDices(state),
                   if (state.isHide && state.modeHise)
-                      Draggable(
-                        feedback: Material(
+                    Draggable(
+                      feedback: Material(
+                        color: Colors.transparent,
+                        child: Container(
+                          width: state.widthBowl,
+                          height: state.heightBowl,
                           color: Colors.transparent,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 2.06,
-                            height: MediaQuery.of(context).size.height / 2.28,
-                            color: Colors.transparent,
-                            child: const Bowl(),
-                          ),
+                          child: Bowl(state: state),
                         ),
-                        childWhenDragging: Container(),
-                        onDraggableCanceled: (velocity, offset) {
-                          state.updateHideStatus(false);
-                        },
-                        child: const Bowl(),
                       ),
+                      childWhenDragging: Container(),
+                      onDraggableCanceled: (velocity, offset) {
+                        state.updateHideStatus(false);
+                      },
+                      child: Bowl(state: state),
+                    ),
                 ],
               ),
             ),
