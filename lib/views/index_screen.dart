@@ -14,9 +14,11 @@ class IndexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<StateIndexScreen>(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      state.reload();
-    });
+    if (state.widthBowl == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        state.reload();
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dice Game"),
