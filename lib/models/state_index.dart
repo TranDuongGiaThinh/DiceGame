@@ -11,9 +11,9 @@ class StateIndexScreen with ChangeNotifier {
   int count = 3;
   
   final List<DiceMode> dices = [
-    DiceMode(value: 1, point: const Offset(100 - 55, 195 - 55)),
-    DiceMode(value: 1, point: const Offset(100 + 55, 195 - 55)),
-    DiceMode(value: 1, point: const Offset(100, 195 + 30))
+    DiceMode(value: 1, point: const Offset(100 - 55, 180 - 50)),
+    DiceMode(value: 1, point: const Offset(100 + 55, 180 - 50)),
+    DiceMode(value: 1, point: const Offset(100, 180 + 25))
   ];
   int score = 3;
 

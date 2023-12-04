@@ -6,8 +6,8 @@ class Plate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width - 20,
-      height: MediaQuery.of(context).size.width - 100,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: CustomPaint(
         painter: PlatePainter(),
         foregroundPainter: BottomPlate(),
@@ -25,7 +25,7 @@ class PlatePainter extends CustomPainter {
       ..strokeWidth = 2.0;
 
     final center = Offset(size.width / 2, size.height / 2);
-    final horizontalRadius = size.width;
+    final horizontalRadius = size.width -20;
     final verticalRadius = size.height / 2;
 
     canvas.drawOval(
